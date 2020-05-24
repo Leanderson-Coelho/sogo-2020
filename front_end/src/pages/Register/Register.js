@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   CssBaseline,
   Grid,
@@ -8,12 +8,20 @@ import {
   Paper,
 } from '@material-ui/core';
 import { useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
+import ParticipantService from '../../services/Participant';
+import { ParticipantDTO } from '../../model/ParticipantDTO';
 import { useStyle } from './Style';
+import Toast from '../../components/Toast';
 import RegisterSVG from '../../assets/svg/register_participant.svg';
 
 const Register = () => {
   const classes = useStyle();
+  const history = useHistory();
+  const [openToast, setOpenToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastSeverity, setToastSeverity] = useState('success');
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -31,7 +39,25 @@ const Register = () => {
     password: '',
   };
 
-  function handlerSubmit(values) {}
+  function onToastClose() {
+    setOpenToast(false);
+  }
+
+  async function handlerSubmit(values) {
+    try {
+      console.log(values);
+      await ParticipantService.create(
+        new ParticipantDTO(values.name, values.email, values.password)
+      );
+      setToastMessage('Participante cadastrado com sucesso!');
+    } catch (err) {
+      console.log(err);
+      setToastMessage('Falha ao cadastrar participante');
+      setToastSeverity('error');
+    } finally {
+      setOpenToast(true);
+    }
+  }
 
   const formik = useFormik({
     initialValues,
@@ -41,7 +67,13 @@ const Register = () => {
 
   return (
     <div className={classes.root}>
-      <Grid className={classes.title} item md={6}>
+      <Toast
+        severity={toastSeverity}
+        open={openToast}
+        message={toastMessage}
+        onClose={onToastClose}
+      />
+      <Grid className={classes.title} item xs={12} md={6}>
         <Typography className={classes.titleText}>
           Cadastrar-se como participante
         </Typography>
@@ -53,9 +85,9 @@ const Register = () => {
         container
         direction="column"
       >
-        <Grid className={classes.form} item>
+        <Grid className={classes.form} item xs={12} md={12}>
           <Paper className={classes.paper} elevation={3}>
-            <Grid className={classes.itemInput} item>
+            <Grid className={classes.itemInput} item xs={12}>
               <TextField
                 value={formik.values.name}
                 onChange={(e) => formik.setFieldValue('name', e.target.value)}
@@ -99,6 +131,14 @@ const Register = () => {
                 fullWidth
               >
                 Cadastrar-se
+              </Button>
+            </Grid>
+            <Grid container direction="column" alignItems="center">
+              <Button
+                onClick={() => history.push('/')}
+                className={classes.cancelButton}
+              >
+                Cacelar
               </Button>
             </Grid>
           </Paper>

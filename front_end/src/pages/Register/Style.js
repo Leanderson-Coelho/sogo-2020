@@ -10,7 +10,6 @@ export const useStyle = makeStyles((theme) => ({
   },
   form: {
     padding: theme.spacing(1),
-    width: '50%',
   },
   paper: {
     padding: theme.spacing(6),
@@ -31,5 +30,11 @@ export const useStyle = makeStyles((theme) => ({
   itemButton: {
     marginTop: theme.spacing(4),
     padding: theme.spacing(1),
+  },
+  cancelButtonItem: {
+    alignSelf: 'center',
+  },
+  cancelButton: {
+    color: '#757575',
   },
 }));
