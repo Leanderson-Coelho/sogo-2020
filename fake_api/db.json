@@ -1,46 +1,20 @@
 {
-  "users": [
+  "participant": [
     {
       "name": "coelho",
       "email": "coelho@gmail.com",
       "password": "coelho",
-      "id": 0.30416585723595846
-    },
+      "id": 0.30416585723595846,
+      "type": "participant"
+    }
+  ],
+  "teachers": [
     {
-      "name": "xesqdele",
-      "email": "xesqdele@gamc.com",
+      "name": "leanderson",
+      "email": "leanderson@gmail.com",
       "password": "coelho",
-      "id": 0.3690137451625126
-    },
-    {
-      "name": "adasdasdasd",
-      "email": "dasdasd@as.com",
-      "password": "coelho",
-      "id": 0.02677899859214916
-    },
-    {
-      "name": "poucosda",
-      "email": "leand@gmail.com",
-      "password": "coelho",
-      "id": 0.41319120937182774
-    },
-    {
-      "name": "dasdasad",
-      "email": "leada@com.com",
-      "password": "coelho",
-      "id": 0.7211405009448568
-    },
-    {
-      "name": "dasdasad",
-      "email": "leada@com.com",
-      "password": "coelho",
-      "id": 0.5186478444187141
-    },
-    {
-      "name": "caio   ",
-      "email": "caio@gmai.com",
-      "password": "coelho",
-      "id": 0.7496178581257513
+      "id": 0.30416575723595846,
+      "type": "teachear"
     }
   ]
 }

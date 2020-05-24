@@ -54,6 +54,22 @@ server.post('/auth/login', (req, res) => {
   res.status(200).json({ accessToken });
 });
 
+server.post('/teacher', (req, res, next) => {
+  console.log('/teacher midleware');
+  let data = req.body;
+  data = {...data, id: Math.random()};
+  req.body = data;
+  next();
+});
+
+server.post('/participant', (req, res, next) => {
+  console.log('/participant midleware');
+  let data = req.body;
+  data = {...data, id: Math.random()};
+  req.body = data;
+  next();
+});
+
 server.use(/^(?!\/auth).*$/, (req, res, next) => {
   if (
     req.headers.authorization === undefined ||

@@ -9,6 +9,6 @@ export default {
   },
 
   async users() {
-    console.log(await Axios.get(`${API}/users`));
+    console.log(await Axios.post(`${API}/teacher`, { name: 'leanderson' }));
   },
 };
