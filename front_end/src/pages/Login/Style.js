@@ -19,11 +19,19 @@ export const useStyle = makeStyles((theme) => ({
   fieldButton: {
     marginTop: theme.spacing(4),
   },
+  fieldSubscribe: {
+    marginTop: theme.spacing(4),
+    alignItems: 'center',
+    color: theme.palette.primary.main,
+    cursor: 'pointer',
+    zIndex: 10,
+  },
   imageSvg: {
     position: 'absolute',
-    // marginTop: theme.spacing(1),
     opacity: 0.2,
-    // marginLeft: '-6%',
-    // height: '65%',
+  },
+  modalLoading: {
+    width: 200,
+    height: 200,
   },
 }));
