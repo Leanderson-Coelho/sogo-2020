@@ -32,4 +32,9 @@ export default {
   token() {
     return localStorage.getItem(TOKEN_KEY);
   },
+
+  logout() {
+    localStorage.removeItem(TOKEN_KEY, null);
+    localStorage.removeItem(USER_KEY, null);
+  },
 };

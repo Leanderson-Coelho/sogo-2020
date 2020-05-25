@@ -83,4 +83,7 @@ export const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     color: '#757575',
   },
+  avatar: {
+    backgroundColor: '#fff',
+  },
 }));

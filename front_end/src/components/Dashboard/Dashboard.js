@@ -5,60 +5,87 @@ import {
   AppBar,
   Toolbar,
   CssBaseline,
-  Typography,
   useMediaQuery,
+  Grid,
+  Avatar,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  Button,
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import clsx from 'clsx';
+import { useHistory } from 'react-router-dom';
+import AuthService from '../../services/Auth';
 import { useStyles } from './Style';
 import ItemMenu from '../ItemMenu';
+import Logo from '../../assets/Easy_Course_logo_branca.png';
 
 const Dashboard = ({ children, ...props }) => {
   const classes = useStyles();
+  const history = useHistory();
   const matches = useMediaQuery('(min-width:600px)');
+  const [openModal, setOpenModal] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const { menu } = props;
-  const { contents } = props;
+  const user = AuthService.userSession();
 
   useEffect(() => {
-    console.log(contents);
-  });
-
-  useEffect(() => {
-    setIsMenuOpen(false);
+    if (!matches) {
+      setIsMenuOpen(false);
+    }
   }, [matches]);
+
+  function handleLogout() {
+    console.log('sair');
+    setOpenModal(false);
+    AuthService.logout();
+    history.push('/');
+  }
 
   return (
     <div className={classes.root}>
       <CssBaseline />
+      <Dialog open={openModal} onClose={() => setOpenModal(false)}>
+        <DialogTitle id="alert-dialog-title">
+          Deseja realmente fazer Logout?
+        </DialogTitle>
+        <DialogActions>
+          <Button onClick={handleLogout} color="primary" autoFocus>
+            Sair
+          </Button>
+        </DialogActions>
+      </Dialog>
       <AppBar
         position="absolute"
         className={clsx(classes.appBar, isMenuOpen && classes.appBarShift)}
       >
         <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={() => setIsMenuOpen(true)}
-            className={clsx(
-              classes.menuButton,
-              isMenuOpen && classes.menuButtonHidden
-            )}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            Dashboard
-          </Typography>
+          {matches && (
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={() => setIsMenuOpen(true)}
+              className={clsx(
+                classes.menuButton,
+                isMenuOpen && classes.menuButtonHidden
+              )}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
+          <img width="250" height="50" src={Logo} alt="" />
+          <Grid container justify="flex-end">
+            <Grid item>
+              {matches && user.name}
+              <Button onClick={() => setOpenModal(true)}>
+                <Avatar className={classes.avatar} />
+              </Button>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -78,9 +105,8 @@ const Dashboard = ({ children, ...props }) => {
         </div>
         <List>
           {menu.map((i) => (
-            <ItemMenu to={i.to} name={i.name} icon={i.icon} />
+            <ItemMenu to={i.to} name={i.name} icon={i.icon} key={i.id} />
           ))}
-          {/* <ItemMenu to="/teacher" name="Professor" /> */}
         </List>
       </Drawer>
       {children}
