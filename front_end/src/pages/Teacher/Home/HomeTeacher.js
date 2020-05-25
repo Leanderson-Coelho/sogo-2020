@@ -11,10 +11,23 @@ import {
   CardActions,
 } from '@material-ui/core';
 import { NoteAdd, FindInPage } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 import { useStyle } from './Style';
+
+const ACTION_TYPE = 'CADASTRAR';
 
 const HomeTeacher = () => {
   const classes = useStyle();
+  const history = useHistory();
+
+  function handleAction(action) {
+    if (action === ACTION_TYPE) {
+      history.push('/teacher/register');
+    } else {
+      history.push('/teacher/list');
+    }
+  }
+
   return (
     <div className={classes.content}>
       <Container className={classes.container}>
@@ -31,7 +44,11 @@ const HomeTeacher = () => {
                 />
                 <CardContent>Adicione um novo professor ao grupo!</CardContent>
                 <CardActions>
-                  <Button variant="outlined" color="primary">
+                  <Button
+                    onClick={() => handleAction('CADASTRAR')}
+                    variant="outlined"
+                    color="primary"
+                  >
                     Cadastrar
                   </Button>
                 </CardActions>
@@ -50,8 +67,12 @@ const HomeTeacher = () => {
                   Visualizar os professores já cadastrados!
                 </CardContent>
                 <CardActions>
-                  <Button variant="outlined" color="primary">
-                    Cadastrar
+                  <Button
+                    onClick={() => handleAction('LISTAR')}
+                    variant="outlined"
+                    color="primary"
+                  >
+                    Visualizar
                   </Button>
                 </CardActions>
               </Card>

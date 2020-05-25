@@ -3,6 +3,7 @@ import { Switch } from 'react-router-dom';
 import { School, VideoLibrary } from '@material-ui/icons';
 import Dashboard from '../../components/Dashboard/Dashboard';
 import HomeTeacher from './Home/HomeTeacher';
+import Register from './Register/Register';
 import { PrivateRouter } from '../../Routes';
 
 const Teacher = () => {
@@ -29,7 +30,9 @@ const Teacher = () => {
           <PrivateRouter path="/teacher/home">
             <HomeTeacher />
           </PrivateRouter>
-          <PrivateRouter path="/teacher/register">Cadastro</PrivateRouter>
+          <PrivateRouter path="/teacher/register">
+            <Register />
+          </PrivateRouter>
         </Switch>
       </Dashboard>
     </div>
