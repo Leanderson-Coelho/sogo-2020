@@ -28,4 +28,8 @@ export default {
   userSession() {
     return JSON.parse(localStorage.getItem(USER_KEY));
   },
+
+  token() {
+    return localStorage.getItem(TOKEN_KEY);
+  },
 };
