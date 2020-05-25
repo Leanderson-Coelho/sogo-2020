@@ -24,4 +24,8 @@ export default {
   isAuthenticated() {
     return localStorage.getItem(TOKEN_KEY) !== null;
   },
+
+  userSession() {
+    return JSON.parse(localStorage.getItem(USER_KEY));
+  },
 };
