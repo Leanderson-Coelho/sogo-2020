@@ -7,7 +7,7 @@ const server = jsonServer.create();
 
 const router = jsonServer.router('./db.json');
 
-const userdb = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'));
+const db = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'));
 
 server.use(jsonServer.defaults());
 
@@ -30,47 +30,70 @@ function verifyToken(token) {
 function isAuthenticad(email, password) {
   console.log('isAuthenticad', { email, password });
   if (email && password) {
-    return (
-      userdb.users.findIndex(
-        (user) => user.email === email && user.password === password
-      ) !== -1
-    );
+    let userIdenx = db.participants.findIndex((user) => user.email === email && user.password === password);
+    if(userIdenx !== -1) {
+      return db.participants[userIdenx];
+    } else {
+      userIdenx = db.teachers.findIndex((user) => user.email === email && user.password === password); 
+      if(userIdenx !== -1) {
+        return db.teachers[userIdenx];
+      }
+    }
   }
-  return false;
+  return null;
 }
 
 server.post('/auth/login', (req, res) => {
   console.log('server.post(/auth/login', req.body);
   const { email, password } = req.body;
-  console.log('email', email);
-  console.log('password', password);
-  if (isAuthenticad(email, password) === false) {
+  const user = isAuthenticad(email, password)
+  if (!user) {
     const status = 401;
     const message = 'Icorrect email or password';
     res.status(status).json({ status: message });
     return;
   }
   const accessToken = createToken({ email, password });
-  res.status(200).json({ accessToken });
+  res.status(200).json({ accessToken, user });
 });
 
-server.post('/teacher', (req, res, next) => {
-  console.log('/teacher midleware');
-  let data = req.body;
-  data = {...data, id: Math.random()};
-  req.body = data;
-  next();
+server.use(/\/participants(\/.*|\?.*|)/, (req, res, next) => {
+  const path = req.baseUrl;
+  const method = req.method;
+  if(path === '/participants' &&  method === 'POST'){
+    let data = req.body;
+    data = {...data, id: Math.random()};
+    req.body = data;
+    next();
+  }else{
+    if (
+      req.headers.authorization === undefined ||
+      req.headers.authorization.split(' ')[0] !== 'Bearer'
+    ) {
+      const status = 401;
+      const message = 'Bad authorization header';
+      res.status(status).json({ status, message });
+      return;
+    }
+    try {
+      verifyToken(req.headers.authorization.split(' ')[1]);
+      next();
+    } catch (err) {
+      const status = 401;
+      const message = 'Error: access_token is not valid';
+      res.status(status).json({ status, message });
+    }
+  }
 });
 
-server.post('/participant', (req, res, next) => {
-  console.log('/participant midleware');
-  let data = req.body;
-  data = {...data, id: Math.random()};
-  req.body = data;
-  next();
-});
-
-server.use(/^(?!\/auth).*$/, (req, res, next) => {
+server.use(/\/teachers(\/.*|\?.*|)/, (req, res, next) => {
+  const path = req.baseUrl;
+  const method = req.method;
+  if(path === '/teachers' &&  method === 'POST'){
+    let data = req.body;
+    data = {...data, id: Math.random()};
+    req.body = data;
+  }
   if (
     req.headers.authorization === undefined ||
     req.headers.authorization.split(' ')[0] !== 'Bearer'
@@ -92,6 +115,6 @@ server.use(/^(?!\/auth).*$/, (req, res, next) => {
 
 server.use(router);
 
-server.listen(3001, () => {
+server.listen(3002, () => {
   console.log('API Server Loaded');
 });
