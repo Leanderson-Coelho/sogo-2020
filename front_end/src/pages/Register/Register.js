@@ -50,6 +50,7 @@ const Register = () => {
         new ParticipantDTO(values.name, values.email, values.password)
       );
       setToastMessage('Participante cadastrado com sucesso!');
+      formik.resetForm();
     } catch (err) {
       console.log(err);
       setToastMessage('Falha ao cadastrar participante');
