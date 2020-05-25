@@ -1,4 +1,4 @@
-export const API = 'http://localhost:3001';
+export const API = 'http://localhost:3002';
 
 export const TOKEN_KEY = '@easy_course_token';
 

@@ -7,17 +7,16 @@ import {
   Redirect,
 } from 'react-router-dom';
 import Login from './pages/Login/Login';
-
-const isAuthenticad = true;
+import Auth from './services/Auth';
+import Teacher from './pages/Teacher/Teacher';
+import Register from './pages/Register/Register';
 
 export const PrivateRouter = ({ children, ...rest }) => (
   <Route
     {...rest}
-    render={() => (isAuthenticad ? children : <Redirect to="/" />)}
+    render={() => (Auth.isAuthenticated() ? children : <Redirect to="/" />)}
   />
 );
-
-const Autenticado = () => <h1>Autenticado</h1>;
 
 const Routes = () => (
   <Router>
@@ -25,8 +24,11 @@ const Routes = () => (
       <Route exact path="/">
         <Login />
       </Route>
-      <PrivateRouter path="/protected">
-        <Autenticado />
+      <Route path="/register">
+        <Register />
+      </Route>
+      <PrivateRouter path="/teacher">
+        <Teacher />
       </PrivateRouter>
     </Switch>
   </Router>

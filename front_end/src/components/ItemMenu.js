@@ -1,11 +1,11 @@
 import React from 'react';
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import DashboardIcon from '@material-ui/icons/Dashboard';
 
 const ItemMenu = (props) => {
   const { to } = props;
   const { name } = props;
+  const { icon } = props;
 
   const style = {
     textDecoration: 'none',
@@ -15,9 +15,7 @@ const ItemMenu = (props) => {
   return (
     <Link to={to} style={style}>
       <ListItem button>
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
+        <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText primary={name} />
       </ListItem>
     </Link>
