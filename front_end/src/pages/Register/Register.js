@@ -45,7 +45,6 @@ const Register = () => {
 
   async function handlerSubmit(values) {
     try {
-      console.log(values);
       await ParticipantService.create(
         new ParticipantDTO(
           values.name,

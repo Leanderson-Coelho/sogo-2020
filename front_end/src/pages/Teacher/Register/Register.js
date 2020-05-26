@@ -49,7 +49,7 @@ const Register = () => {
       setOpenToast(true);
       formik.resetForm();
     } catch (err) {
-      console.log('entrou no xesqdele', err);
+      console.log(err);
       setToastMessage('Falha ao cadastrar professor!');
       setOpenToast(true);
       setToastSeverity('error');

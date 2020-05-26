@@ -37,8 +37,8 @@ const Login = () => {
   });
 
   const initialValues = {
-    email: 'leanderson@gmail.com',
-    password: 'coelhocoelho',
+    email: '',
+    password: '',
   };
 
   function handlerRoute() {
@@ -53,7 +53,6 @@ const Login = () => {
   async function onFormSubmit(values) {
     try {
       setLoading(true);
-      console.log(values);
       await AuthService.login(new AuthDTO(values.email, values.password));
       handlerRoute();
     } catch (err) {
@@ -132,6 +131,7 @@ const Login = () => {
                 helperText={formik.errors.password}
                 variant="outlined"
                 label="Senha"
+                type="password"
               />
             </Grid>
             <Grid className={classes.fieldButton} item>

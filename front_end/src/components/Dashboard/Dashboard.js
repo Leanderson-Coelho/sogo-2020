@@ -39,7 +39,6 @@ const Dashboard = ({ children, ...props }) => {
   }, [matches]);
 
   function handleLogout() {
-    console.log('sair');
     setOpenModal(false);
     AuthService.logout();
     history.push('/');

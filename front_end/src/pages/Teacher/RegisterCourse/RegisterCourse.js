@@ -43,7 +43,6 @@ const RegisterCourse = () => {
 
   async function onFormSubmit(values) {
     try {
-      console.log('TODO', values);
       await CourseService.create(
         new CourseDTO(
           values.name,
