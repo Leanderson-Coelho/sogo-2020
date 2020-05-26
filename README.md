@@ -54,7 +54,7 @@ Os usuários do tipo `participantes` podem ser cadastrados livremente, um usuár
 
 * [Yup](https://www.npmjs.com/package/yup): Biblioteca javascript para criação de validações de formulário.
 
-* [Axios](): Http Cliente para navegadores em node.
+* [Axios](): Http Client para navegadores em node.
 
 ###### Artes De Logo por Felype *felipeirnyo30@gmail.com*
 ![](https://raw.githubusercontent.com/Leanderson-Coelho/sogo-2020/master/front_end/src/assets/EC_logo_branca_com_fundo.png?token=AIJDUIDSOFH3OYM5DVTKITC622GWM)
