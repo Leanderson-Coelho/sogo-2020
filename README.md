@@ -56,5 +56,5 @@ Os usuários do tipo `participantes` podem ser cadastrados livremente, um usuár
 
 * [Axios](): Http Client para navegadores em node.
 
-###### Artes De Logo por Felype *felipeirnyo30@gmail.com*
+###### Artes De Logo por Felipe *felipeirnyo30@gmail.com*
 ![](https://raw.githubusercontent.com/Leanderson-Coelho/sogo-2020/master/front_end/src/assets/EC_logo_branca_com_fundo.png?token=AIJDUIDSOFH3OYM5DVTKITC622GWM)
