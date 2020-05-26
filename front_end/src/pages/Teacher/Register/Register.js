@@ -40,9 +40,11 @@ const Register = () => {
           values.name,
           values.email,
           values.registration,
-          values.password
+          values.password,
+          'teacher'
         )
       );
+      setToastSeverity('success');
       setToastMessage('Professor cadastrado com sucesso!');
       setOpenToast(true);
       formik.resetForm();

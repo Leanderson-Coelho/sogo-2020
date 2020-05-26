@@ -50,9 +50,11 @@ const RegisterCourse = () => {
           values.realizationDate.toLocaleString(),
           values.duration,
           values.vacancies,
-          userSession.id
+          userSession.id,
+          []
         )
       );
+      setToastSeverity('success');
       setToastMessage('Mini curso criado com sucesso!');
       setOpenToast(true);
       formik.resetForm();
