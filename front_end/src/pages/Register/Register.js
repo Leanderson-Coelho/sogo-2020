@@ -47,8 +47,14 @@ const Register = () => {
     try {
       console.log(values);
       await ParticipantService.create(
-        new ParticipantDTO(values.name, values.email, values.password)
+        new ParticipantDTO(
+          values.name,
+          values.email,
+          values.password,
+          'participant'
+        )
       );
+      setToastSeverity('success');
       setToastMessage('Participante cadastrado com sucesso!');
       formik.resetForm();
     } catch (err) {
