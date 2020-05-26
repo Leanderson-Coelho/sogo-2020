@@ -1,3 +1,4 @@
+import React from 'react';
 import Axios from 'axios';
 import { API, TOKEN_KEY, USER_KEY } from '../config';
 import { UserSession } from '../model/UserSession';
@@ -23,7 +24,24 @@ export default {
   },
 
   isAuthenticated() {
-    return localStorage.getItem(TOKEN_KEY) !== null;
+    if (localStorage.getItem(TOKEN_KEY) !== null) {
+      const userType = this.userSession().type;
+      const location = window.location.pathname;
+      console.log('aqui');
+      if (userType === 'teacher') {
+        if (location.search('participant') !== -1) {
+          window.location.replace('/teacher');
+          return true;
+        }
+        return true;
+      }
+      if (location.search('teacher') !== -1) {
+        window.location.replace('/participant');
+        return true;
+      }
+      return true;
+    }
+    return false;
   },
 
   userSession() {

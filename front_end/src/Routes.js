@@ -9,6 +9,7 @@ import {
 import Login from './pages/Login/Login';
 import Auth from './services/Auth';
 import Teacher from './pages/Teacher/Teacher';
+import Participant from './pages/Participant/Participant';
 import Register from './pages/Register/Register';
 
 export const PrivateRouter = ({ children, ...rest }) => (
@@ -29,6 +30,9 @@ const Routes = () => (
       </Route>
       <PrivateRouter path="/teacher">
         <Teacher />
+      </PrivateRouter>
+      <PrivateRouter path="/participant">
+        <Participant />
       </PrivateRouter>
     </Switch>
   </Router>
