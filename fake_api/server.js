@@ -7,7 +7,7 @@ const server = jsonServer.create();
 
 const router = jsonServer.router('./db.json');
 
-const db = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'));
+let db = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'));
 
 server.use(jsonServer.defaults());
 
@@ -28,6 +28,8 @@ function verifyToken(token) {
 }
 
 function isAuthenticad(email, password) {
+  db = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'));
+  console.log('database reloaded');
   console.log('isAuthenticad', { email, password });
   if (email && password) {
     let userIdenx = db.participants.findIndex((user) => user.email === email && user.password === password);
@@ -46,7 +48,8 @@ function isAuthenticad(email, password) {
 server.post('/auth/login', (req, res) => {
   console.log('server.post(/auth/login', req.body);
   const { email, password } = req.body;
-  const user = isAuthenticad(email, password)
+  const user = isAuthenticad(email, password);
+  console.log('user', user);
   if (!user) {
     const status = 401;
     const message = 'Icorrect email or password';
@@ -61,9 +64,6 @@ server.use(/\/participants(\/.*|\?.*|)/, (req, res, next) => {
   const path = req.baseUrl;
   const method = req.method;
   if(path === '/participants' &&  method === 'POST'){
-    let data = req.body;
-    data = {...data, id: Math.random()};
-    req.body = data;
     next();
   }else{
     if (
@@ -87,13 +87,6 @@ server.use(/\/participants(\/.*|\?.*|)/, (req, res, next) => {
 });
 
 server.use(/\/teachers(\/.*|\?.*|)/, (req, res, next) => {
-  const path = req.baseUrl;
-  const method = req.method;
-  if(path === '/teachers' &&  method === 'POST'){
-    let data = req.body;
-    data = {...data, id: Math.random()};
-    req.body = data;
-  }
   if (
     req.headers.authorization === undefined ||
     req.headers.authorization.split(' ')[0] !== 'Bearer'
