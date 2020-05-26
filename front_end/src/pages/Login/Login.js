@@ -58,6 +58,7 @@ const Login = () => {
       handlerRoute();
     } catch (err) {
       console.log('falha ao executar login');
+      setToastSeverity('success');
       setToastMessage('Falha ao executar o login!');
       setToastSeverity('error');
       setOpenToast(true);
