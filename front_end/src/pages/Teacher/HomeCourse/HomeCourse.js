@@ -1,14 +1,14 @@
 import React from 'react';
 import {
-  Grid,
-  Paper,
-  Button,
   Container,
+  Paper,
   Card,
-  CardHeader,
   CardContent,
-  Avatar,
   CardActions,
+  CardHeader,
+  Grid,
+  Avatar,
+  Button,
 } from '@material-ui/core';
 import { NoteAdd, FindInPage } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
@@ -16,13 +16,13 @@ import { useStyle } from './Style';
 
 const ACTION_TYPE = 'CADASTRAR';
 
-const HomeTeacher = () => {
+const HomeCourse = () => {
   const classes = useStyle();
   const history = useHistory();
 
   function handleAction(action) {
     if (action === ACTION_TYPE) {
-      history.push('/teacher/register');
+      history.push('/teacher/course/create');
     }
   }
 
@@ -40,7 +40,7 @@ const HomeTeacher = () => {
                     </Avatar>
                   }
                 />
-                <CardContent>Adicione um novo professor ao grupo!</CardContent>
+                <CardContent>Adicione um novo curso a plataforma!</CardContent>
                 <CardActions>
                   <Button
                     onClick={() => handleAction(ACTION_TYPE)}
@@ -61,9 +61,7 @@ const HomeTeacher = () => {
                     </Avatar>
                   }
                 />
-                <CardContent>
-                  Visualizar os professores já cadastrados!
-                </CardContent>
+                <CardContent>Visualizar os cursos já cadastrados!</CardContent>
                 <CardActions>
                   <Button
                     onClick={() => handleAction('LISTAR')}
@@ -82,4 +80,4 @@ const HomeTeacher = () => {
   );
 };
 
-export default HomeTeacher;
+export default HomeCourse;

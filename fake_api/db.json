@@ -15,6 +15,30 @@
       "password": "coelhocoelho",
       "id": 0.30416575723595846,
       "type": "teachear"
+    },
+    {
+      "name": "Leanderson Coelho",
+      "email": "leo@gmail.com",
+      "registration": "12AÇ24",
+      "password": "123123123",
+      "id": 0.9475863386431473
+    }
+  ],
+  "courses": [
+    {
+      "name": "Java para iniciantes",
+      "duration": 2,
+      "vacancies": 30,
+      "teacher": 0.30416575723595846,
+      "id": 1
+    },
+    {
+      "name": "Javascript",
+      "realizationDate": "5/26/2020, 9:00:00 AM",
+      "duration": 2,
+      "vacancies": 30,
+      "teacher": 0.30416575723595846,
+      "id": 2
     }
   ]
 }

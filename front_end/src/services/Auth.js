@@ -15,7 +15,8 @@ export default {
         new UserSession(
           userResponse.name,
           userResponse.email,
-          userResponse.type
+          userResponse.type,
+          userResponse.id
         )
       )
     );
